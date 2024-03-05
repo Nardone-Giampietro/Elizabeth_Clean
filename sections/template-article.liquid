@@ -39,8 +39,9 @@
                 <div class="max-w-7xl bg-glue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4">
                     {% if  article.image != blank%} 
                         <img 
-                        class="w-full h-80 object-cover object-center"
-                        src="{{ article |  image_url: width: 400}}" alt="{{ article.image.alt }}"> 
+                            class="w-full h-80 object-cover object-center"
+                            src="{{ article |  image_url: width: 400}}"
+                            alt="{{ article.image.alt }}"> 
                     {% else %}
                         {% assign placeholder_image = "liflestyle-2" %}
                         {{ placeholder_image |  placeholder_svg_tag: "w-full h-80 object-cover object-center p-5" }}
@@ -73,33 +74,47 @@
             <div class="flex-1 mx-auto intems-center justify-center max-w-4xl px-4">
                 <div class="px-1 md:flex mb-3">
                     <div class="px-3 md:w-1/2">
-                        <label for="commet_author" 
-                        class="text-gray-700 font-medium uppercase font-xs mb-2">
+                        <label
+                            for="commet_author" 
+                            class="text-gray-700 font-medium uppercase font-xs mb-2">
                             Name
                         </label>
-                        <input type="text" id="comment_author" placeholder="Name"
-                        class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none"
-                        name="commet[author]" value="{{ form.author }}">
+                        <input
+                            type="text"
+                            id="comment_author"
+                            placeholder="Name"
+                            class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none"
+                            name="commet[author]"
+                            value="{{ form.author }}">
                     </div> 
                     <div class="px-3 md:w-1/2">
-                        <label for="comment_email"
-                        class="text-gray-700 font-medium uppercase font-xs mb-2">
+                        <label
+                            for="comment_email"
+                            class="text-gray-700 font-medium uppercase font-xs mb-2">
                             Email
                         </label>
-                        <input type="email" id="comment_email" placeholder="example@mail.com"
-                        class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none"
-                        name="comment[email]" value="{{ form.email }}">
+                        <input
+                            type="email"
+                            id="comment_email"
+                            placeholder="example@mail.com"
+                            class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none"
+                            name="comment[email]"
+                            value="{{ form.email }}">
                     </div>                    
                 </div>
                 <div class="px-1 md:flex mb-3">
                     <div class="px-3 md:w-full">
-                        <label class="text-gray-700 font-medium uppercase font-xs mb-2" 
-                        for="comment">
+                        <label
+                            class="text-gray-700 font-medium uppercase font-xs mb-2" 
+                            for="comment">
                             Comment
                         </label>
-                        <textarea class="w-full resize-none text-gray-700 border py-3 px-4 mb-3 focus:outline-none"
-                        name="comment[body]" id="comment" required>
-                        {{ form.body }}
+                        <textarea 
+                            class="w-full resize-none text-gray-700 border py-3 px-4 mb-3 focus:outline-none"
+                            name="comment[body]" 
+                            id="comment" 
+                            required>
+                            {{ form.body }}
                         </textarea>
                       </div>                    
                 </div>
@@ -107,7 +122,8 @@
                     <div class="px-3 md:w-full">
                         <input 
                         class="w-full cursor-pointer px-4 py-2 border text-base font-medium text-white bg-gray-900 hover:bg-gray-500"
-                        type="submit" value="SUBMIT">
+                        type="submit"
+                        value="Post Comment">
                     </div>
                 </div>                
             </div>          
