@@ -104,17 +104,17 @@
                             <div class="text-sm font-medium ml-3">
                                 Your comment was not posted.
                             </div>
+                            <ul class="px-3 mb-3 ml 7 list-decimal">
+                                {% for error in form.errors %}
+                                    <li>
+                                        <span>
+                                            {{ form.errors.messages[error] }}
+                                        </span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
-                    <ul class="px-3 mb-3 ml 7 list-decimal">
-                        {% for error in form.errors %}
-                            <li>
-                                <span>
-                                    {{ form.errors.message[error] }}
-                                </span>
-                            </li>
-                        {% endfor %}
-                    </ul>
                 {% else %}
                     {% if form.posted_successfully? %}
                         <div class="flex flex-row item-center w-full my-3 p-5">
