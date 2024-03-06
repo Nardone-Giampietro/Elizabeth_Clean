@@ -62,39 +62,6 @@
     <div id="comments" class="my-8">
         {% if article.comments_count > 0 %}
             <div class="flex-1 items-center justify-center mx-auto max-w-4xl px-4">
-                {% if form.error %}
-                    <div class="border p-5">
-                        <div class="flex flex-row items-center w-full my-3">
-                            <div class="text-red-900">
-                                {% render "icon-failed"%}
-                            </div>
-                            <div class="text-sm font-medium ml-3">
-                                Your comment was not posted.
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="px-3 mb-3 ml 7 list-decimal">
-                        {% for error in form.errors %}
-                            <li>
-                                <span>
-                                    {{ form.errors.message[error] }}
-                                </span>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    {% if form.posted_successfully? %}
-                        <div class="flex flex-row item-center w-full my-3 p-5">
-                            <div class="text-green-900">
-                                {% render "icon-success" %}
-                            </div>
-                            <div class="text-sm font-medium ml-3">
-                                The comment is posted successfully.
-                            </div>
-                        </div>
-                    {% endif %}
-
-                {% endif %}
                 <h1 class="text-lg mb-4 font-medium">
                     What people are saying.
                 </h1>
@@ -128,6 +95,38 @@
     <div id="comment_form" class="mb-8">
         {% form 'new_comment', article %}
             <div class="flex-1 mx-auto intems-center justify-center max-w-4xl px-4">
+                {% if form.errors %}
+                    <div class="border p-5">
+                        <div class="flex flex-row items-center w-full my-3">
+                            <div class="text-red-900">
+                                {% render "icon-failed"%}
+                            </div>
+                            <div class="text-sm font-medium ml-3">
+                                Your comment was not posted.
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="px-3 mb-3 ml 7 list-decimal">
+                        {% for error in form.errors %}
+                            <li>
+                                <span>
+                                    {{ form.errors.message[error] }}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    {% if form.posted_successfully? %}
+                        <div class="flex flex-row item-center w-full my-3 p-5">
+                            <div class="text-green-900">
+                                {% render "icon-success" %}
+                            </div>
+                            <div class="text-sm font-medium ml-3">
+                                The comment is posted successfully.
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
                 <div class="px-1 md:flex mb-3">
                     <div class="px-3 md:w-1/2">
                         <label
