@@ -1391,6 +1391,10 @@ video {
     width: 100%;
   }
 
+  .sm\:max-w-lg {
+    max-width: 32rem;
+  }
+
   .sm\:justify-start {
     justify-content: flex-start;
   }
