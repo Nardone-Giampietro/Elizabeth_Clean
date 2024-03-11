@@ -1,10 +1,13 @@
-
-<div class="relative m-3 flex flex-wrap mx-auto justify-center">
-    {% paginate collection.products by 12 %}
-        {% for product in collection.products %}
-            {% render "product-card", product: product%}
-        {% endfor %}
+<h1 class="text-3xl text-center">{{ collection.title }}</h1>
+{% paginate collection.products by 6 %}
+    <div class="max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-4 justify-center">
+    {% for product in collection.products %}
+        {% render "product-card", product: product%}
+    {% endfor %}
+    </div>
+    <div class="w-full flex items-center justify-center">
         {% render "pagination", paginate: paginate %}
-    {% endpaginate %}
-</div>
+    </div>
+{% endpaginate %}
+
 
