@@ -2,7 +2,23 @@
     "name": "Cart Template",
     "sections": {
         "template": {
-            "type": "template-cart"
+            "type": "template-cart",
+            "blocks": {
+                "total": {
+                    "type": "total"
+                },
+                "update-button": {
+                    "type": "update_button"
+                },
+                "checkout-button": {
+                    "type": "checkout_button"
+                }
+            },
+            "block_order": [
+                "total",
+                "update-button",
+                "checkout-button"
+            ]
         }
     },
     "order": [
