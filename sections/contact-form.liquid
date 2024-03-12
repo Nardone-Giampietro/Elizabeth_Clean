@@ -2,19 +2,54 @@
     <div class="container mx-auto">
         <div class="max-w-md mx-auto my-10 bg-white p-5 rounded-md shadow-sm">
             <div class="text-center">
-                <h1 class="my-3 text-3xl font-semibold text-gray-700">Contact Us</h1>
-                <p class="text-gray-400">Fill up the form below to send us a message.</p>
+                {% if section.settings.title != blank %}
+                    <h1 class="my-3 text-3xl font-semibold text-gray-700">{{ section.settings.title  }}</h1>
+                    <p class="text-gray-400">{{ section.settings.subtitle }}</p>
+                {% endif %}
             </div>
             <div class="m-7">
                 {% form 'contact' %}
-                    {{ form.errors | default_errors }}
-                    <div class="mb-6">
-                        <label for="contact_first_name" class="block mb-2 text-sm text-gray-600">First Name</label>
-                        <input type="text" name="contact[first_name]" id="contact_first_name" placeholder="Mario" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" />
-                    </div>
-                    <div class="mb-6">
-                        <label for="contact_last_name" class="block mb-2 text-sm text-gray-600">Last Name</label>
-                        <input type="text" name="contact[last_name]" id="contact_last_name" placeholder="Rossi" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" />
+                    {% if form.errors %}
+                        <div class="border p-5">
+                            <div class="flex flex-row items-center w-full my-3">
+                                <div class="text-red-900">
+                                    {% render "icon-failed"%}
+                                </div>
+                                <div class="text-sm font-medium ml-3">
+                                    Your message is not sent.
+                                </div>
+                            </div>
+                            <ul class="px-4 mb-3 ml 7 list-decimal">
+                                    {% for error in form.errors %}
+                                        <li>
+                                            <span>
+                                                {{ form.errors.messages[error] }}
+                                            </span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                        </div>
+                    {% else %}
+                        {% if form.posted_successfully? %}
+                            <div class="flex flex-row item-center w-full my-3 p-5">
+                                <div class="text-green-900">
+                                    {% render "icon-success" %}
+                                </div>
+                                <div class="text-sm font-medium ml-3">
+                                    The message is sent successfully.
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    <div class="md:flex">
+                        <div class="mb-6 md:w-1/2 md:mr-3">
+                            <label for="contact_first_name" class="block mb-2 text-sm text-gray-600">First Name</label>
+                            <input type="text" name="contact[first_name]" id="contact_first_name" placeholder="Mario" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" />
+                        </div>
+                        <div class="mb-6 md:w-1/2">
+                            <label for="contact_last_name" class="block mb-2 text-sm text-gray-600">Last Name</label>
+                            <input type="text" name="contact[last_name]" id="contact_last_name" placeholder="Rossi" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" />
+                        </div>
                     </div>
                     <div class="mb-6">
                         <label for="email" class="block mb-2 text-sm text-gray-600">Email Address</label>
@@ -46,7 +81,17 @@
         }
     ],
     "settings": [
-        
+            {
+                "type": "text",
+                "id": "Title",
+                "label": "title"
+            },
+            {
+                "type": "text",
+                "id": "subtitle",
+                "label": "subtitle",
+                "default": "Fill up the form below to send us a message."
+            }
         ]
 }
 {% endschema %}
