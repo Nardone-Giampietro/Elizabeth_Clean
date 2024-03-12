@@ -1,0 +1,47 @@
+<div class="flex flex-col items-center my-8">
+    <h1 class="text-3xl font-medium">
+        {{ section.settings.title }}
+    </h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {% for collection in collections %}
+            {% if collection.all_products_count > 0 %}
+                <div class="w-full py-6 px-3">
+                    <div class="border bg-white shadow-lg rounded-lg max-w-sm overflow-hidden">
+                        <div class="overflow-hidden">
+                            <a href="{{ collection.url }}">
+                                {% if collection.featured_image != blank %}
+                                    {% assign collection_image = collection.featured_image %}
+                                {% else %}
+                                    {% assign collection_image = collection.products[0].image %}
+                                {% endif %}
+                                    <img 
+                                        class="w-full h-full object-cover rounded-t-lg transition duration-600 ease-in-out transform hover:scale-105"
+                                        src="{{ collection_image |  img_url: "medium"}}" 
+                                        alt="{{ collection.title}}">
+                            </a>
+                        </div>
+                        <div class="pb-3 pt-3 text-center bg-gray-200">
+                            <h1 class="text-xl text-gray-900 font-semibold text-2xl tracking-tight">
+                                {{ collection.title |  upcase }}
+                            </h1>
+                        </div>
+                    </div>
+                </div>    
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Template List Collections",
+    "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "default": "Collections",
+                "label": "Collections Title"
+            }
+        ]
+}
+{% endschema %}

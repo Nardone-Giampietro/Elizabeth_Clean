@@ -5,27 +5,27 @@
             src="{{ product.featured_image |  img_url: "large"}}" 
             alt="{{ product.feature_image.alt }}">
     </a>
-        <div class="px-5 pb-5">
-            <a href="{{ product.url }}">
-                {% if vendor %}
-                    <span class="text-1sm font-normale text-gray-500">
-                        {{ product.vendor }}
-                    </span>
-                {% endif %}
-                <h3 class="text-gray-900 font-semibold text-2xl tracking-tight">
-                    {{ product.title }}
-                </h3>
-            </a>
-            <div class="flex items-center justify-between">
-                <span class="text-3xl font-bold text-gray-900">
-                    {{ product.price |  money }}
+    <div class="px-5 pb-5">
+        <a href="{{ product.url }}">
+            {% if vendor %}
+                <span class="text-1sm font-normale text-gray-500">
+                    {{ product.vendor }}
                 </span>
-                {% unless product.available %}
-                    <span 
-                        class="text-red-500 font-medium text-sm px-5 py-2.5 text-center">
-                        Sold Out
-                    </span>
-                {% endunless %}
-            </div>
+            {% endif %}
+            <h3 class="text-gray-900 font-semibold text-2xl tracking-tight">
+                {{ product.title }}
+            </h3>
+        </a>
+        <div class="flex items-center justify-between">
+            <span class="text-3xl font-bold text-gray-900">
+                {{ product.price |  money }}
+            </span>
+            {% unless product.available %}
+                <span 
+                    class="text-red-500 font-medium text-sm px-5 py-2.5 text-center">
+                    Sold Out
+                </span>
+            {% endunless %}
         </div>
+    </div>
 </div>
