@@ -1,11 +1,18 @@
 {
-    "name": "Page Template",
-    "sections": {
-        "template": {
-            "type": "template-Page"
-        }
+  "sections": {
+    "template": {
+      "type": "template-Page",
+      "settings": {
+      }
     },
-    "order": [
-        "template"
-    ]
+    "contact_form_qkDqyA": {
+      "type": "contact-form",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "template",
+    "contact_form_qkDqyA"
+  ]
 }
