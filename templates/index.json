@@ -4,7 +4,7 @@
       "type": "featured-collection",
       "settings": {
         "title": "Featured Collection",
-        "featured_collection": "",
+        "featured_collection": "all",
         "product_to_show": 3
       }
     }
