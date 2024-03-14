@@ -147,15 +147,28 @@
   </div>
   <div
     x-show="searchBarOpen"
-    class="w-full absolute top-0 bg-white border h-30">
+    class="w-full h-full flex items-center justify-center absolute top-0 bg-white border">
       <button
         x-on:click="searchBarOpen = false"
         type="button"
         class="absolute top-0 right-0 mr-5 mt-5 text-gray-500">
             {% render 'icon-close' %}
       </button>
-      <div class="flex justify-center items-center">
-        kjbkj
+      <div class="flex justify-center">
+        <form action="{{ routes.search_url }}" method="get" class="flex-auto">
+          <div class="relative text-gray-500 px-10 py-10 border rounded-full">
+            <input
+              type="search"
+              name="q"
+              placeholder="search"
+              class="w-full bg-white h-10 px-5 pr-10 text-sm focus:outline-none">
+            <button
+              type="submit"
+              class="absolute right-0 top-0 mr-2 md:mr-20">
+              {% render 'icon-search' %}
+            </button>
+          </div>
+        </form>
       </div>
   </div>          
 </div> 
