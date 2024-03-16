@@ -1,0 +1,131 @@
+<div 
+    x-data="{newAddress: false}"
+    class="max-w-6xl mx-auto px-4 py-12">
+    <div class="flex flex-col md:flex-row items-center justify-between my-5 gap-4">
+        <h1 class="text-2xl font-bold text-gray-700">
+            Addresses
+        </h1>
+        <button
+            x-on:click="newAddress = true"
+            type="button"
+            class="text-white font-medium bg-gray-700 hover:bg-gray-900 px-6 py-2">
+                Create new address
+        </button>
+        <a 
+            class="text-blue-600 hover:text-blue-900 font-medium underline"
+            href="{{ routes.account_url }}">
+            Back to Account
+        </a>
+    </div>
+    <div 
+        x-show="newAddress"
+        class="h-full w-full fixed inset-0 bg-gray-600 bg-opacity-50 overflows-y-auto z-50">
+        <div class="relative max-w-md mx-auto bg-white border rounded-lg shadow-sm top-20 p-4">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-medium">New Address</h2>
+                <button 
+                    x-on:click="newAddress = false"
+                    type="button"
+                    class="text-gray-500">
+                    {% render "icon-close" %}
+                </button>
+            </div>
+            {% form 'customer_address', customer.new_address %}
+                <div class="flex flex-row">
+                    <input 
+                        type="text"
+                        name="address[first_name]"
+                        class="border mb-4 border-gray-200 rounded-lg outline-none focus:ring-1 ring-blue-400 w-full h-10 pl-1"
+                        value="{{ form.first_name }}"
+                        placeholder="First Name"
+                        required>
+                </div>
+                <div class="flex flex-row my-2">
+                    <input 
+                        type="text"
+                        name="address[last_name]"
+                        class="border mb-4 border-gray-200 rounded-lg outline-none focus:ring-1 ring-blue-400 w-full h-10 pl-1"
+                        value="{{ form.last_name }}"
+                        placeholder="Last Name"
+                        required>
+                </div>
+                <div class="flex flex-row my-2">
+                    <input 
+                        type="text"
+                        name="address[company]"
+                        class="border mb-4 border-gray-200 rounded-lg outline-none focus:ring-1 ring-blue-400 w-full h-10 pl-1"
+                        value="{{ form.company }}"
+                        placeholder="Company"
+                        >
+                </div>
+                <div class="flex flex-row my-2">
+                    <input 
+                        type="text"
+                        name="address[address1]"
+                        class="border mb-4 border-gray-200 rounded-lg outline-none focus:ring-1 ring-blue-400 w-full h-10 pl-1"
+                        value="{{ form.address1 }}"
+                        placeholder="Address"
+                        required>
+                </div>
+                <div class="flex flex-row my-2">
+                    <input 
+                        type="text"
+                        name="address[address2]"
+                        class="border mb-4 border-gray-200 rounded-lg outline-none focus:ring-1 ring-blue-400 w-full h-10 pl-1"
+                        value="{{ form.address2 }}"
+                        placeholder="Address 2"
+                        >
+                </div>
+                <div class="flex flex-row my-2">
+                    <input 
+                        type="text"
+                        name="address[city]"
+                        class="border mb-4 border-gray-200 rounded-lg outline-none focus:ring-1 ring-blue-400 w-full h-10 pl-1"
+                        value="{{ form.city }}"
+                        placeholder="City"
+                        >
+                </div>
+                <div class="flex flex-row my-2">
+                    <select 
+                        name="address[country]"
+                        class="border mb-4 border-gray-200 rounded-lg outline-none focus:ring-1 ring-blue-400 w-full h-10 pl-1"
+                        value="{{ form.country }}"
+                        id="address-country-{{ form.id }}"
+                        placeholder="Country"
+                        >
+                    </select>
+                </div>
+            {% endform %}
+        </div>
+    </div>
+    <div>
+        {% paginate customer.addresses by 10 %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grap-4 lg:gap-12 p-4 md:p-12">
+            {% for address in customer.addresses %}
+                <div>
+                    <div class="relative divide-y flex flex-col text-center p-2 rounded-lg shadow-lg">
+                        {% if address == customer.default_address %}
+                            <span class="text-xs rounded-md font-medium text-white bg-green-700 px-4 py-2">
+                                DEFAULT
+                            </span>
+                        {% endif %}
+                        <div class="my-4 h-full">
+                            <p class="my-2">
+                                {{ address |  format_address }}
+                            </p>
+                        </div>
+                        <div class="flex flex-row gap-2 mt-4">
+                            <button class="w-full mt-2 text-xs rounded-md text-white bg-blue-700 hover:bg-blue-900 font-medium py-2">
+                                EDIT
+                            </button>
+                            <button class="w-full mt-2 text-xs rounded-md text-red-700 border border-red-700 hover:border-red-900 hover:text-red-900 font-medium py-2">
+                                DELETE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}       
+            </div>
+        {% endpaginate %}
+    </div>
+</div>
