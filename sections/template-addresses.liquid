@@ -19,7 +19,7 @@
     </div>
     <div 
         x-show="newAddress"
-        class="h-full w-full fixed inset-0 bg-gray-600 bg-opacity-50 overflows-y-auto z-50">
+        class="h-full w-full fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto z-50">
         <div class="relative max-w-md mx-auto bg-white border rounded-lg shadow-sm top-20 p-4">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-lg font-medium">New Address</h2>
@@ -159,7 +159,7 @@
                 <div x-data="{editAddress_{{ address.id }}: false}">
                     <div
                         x-show="editAddress_{{ address.id }}"
-                        class="h-full w-full fixed inset-0 bg-gray-600 bg-opacity-50 overflows-y-auto z-50">
+                        class="h-full w-full fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto z-50">
                         <div class="relative max-w-md mx-auto bg-white border rounded-lg shadow-sm top-20 p-4">
                             <div class="flex items-center justify-between mb-4">
                                 <h2 class="text-lg font-medium">Edit Address</h2>
@@ -310,13 +310,15 @@
                                 EDIT
                             </button>
                             <button
-                                data-delete-address
                                 data-url="{{ address.url }}"
-                                class="w-full mt-2 text-xs rounded-md text-red-700 border border-red-700 hover:border-red-900 hover:text-red-900 font-medium py-2">
+                                class="w-full mt-2 text-xs rounded-md text-red-700 border border-red-700 hover:border-red-900 hover:text-red-900 font-medium py-2"
+                                data-delete-address
+                                >                
                                 DELETE
                             </button>
                         </div>
-                        <form mothod="POST" action="{{ address.url }}">
+                        <form method="post" action="{{ address.url }}">
+                            <input type="hidden" name="_method" value="delete">
                         </form>
                     </div>
                 </div>
@@ -335,13 +337,16 @@
             this.customerAddressesSelector();
         }
 
-        initDeleteAddressButton(){
+        initDeleteAddressButton() {
             const deleteButtons = document.querySelectorAll("button[data-delete-address]");
-            if (deleteButtons.length < 1) return;
+            if(deleteButtons.length < 1) return;
             deleteButtons.forEach(button => {
-                button.addEventListener("click", function(e){
+                button.addEventListener("click", function(e) {
                     var url = this.dataset.url;
-                    document.querySelector(`form[action="${url}"]`);
+                    var confirmation = window.confirm("Do you really wish to delete this address?");
+                    if(confirmation) {
+                        document.querySelector(`form[action="${url}"]`).submit();
+                    }
                 })
             })
         }
