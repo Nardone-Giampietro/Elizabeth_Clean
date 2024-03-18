@@ -1,0 +1,65 @@
+<div class="w-full h-full">
+    <div
+        class="flex flex-col h-full justify-center items-center shadow rounded-lg bg-white m-5 px-6 md:w-1/2 lg:w-2/3 md:m-auto">
+        <h2 class="text-2xl my-4">Activate Account</h2>
+        <h3 class="text-sm my-4">Create the password</h3>
+        {% form 'activate_customer_password'%}
+            <div class="w-full p-2 justify-start flex flex-col">
+                {% if form.errors %}
+                    <div
+                        class="relative border rounded-lg mb-4 border-red-400 bg-red-100 text-red-700 px-4 py-3"
+                        role="alert">
+                        <strong class="text-bold">
+                            Error
+                        </strong>
+                        <p class="block sm:inline">
+                            {{ form.errors |  default_errors }}
+                        </p>
+                    </div>
+                {% endif %}
+                <div class="my-4 flex flex-row">
+                    <span
+                        class="z-highest rounded-l-lg w-10 h-10 flex justify-center items-center text-2xl text-gray-400 border border-r-0"
+                        mode="render">
+                            {% render 'icon-key' %}
+                    </span>
+                    <input
+                        type="password"
+                        name="customer[password]"
+                        class="h-10 border border-gray-200 rounded-r-lg outline-none focus:ring-1 ring-blue-300 w-full pl-1"
+                        autocomplete="new-password"
+                        placeholder="password"
+                        required>
+                </div>
+                <div class="my-4 flex flex-row">
+                    <span
+                        class="z-highest rounded-l-lg w-10 h-10 flex justify-center items-center text-2xl text-gray-400 border border-r-0"
+                        mode="render">
+                            {% render 'icon-key' %}
+                    </span>
+                    <input
+                        type="password"
+                        name="customer[password_confirmation]"
+                        class="h-10 border border-gray-200 rounded-r-lg outline-none focus:ring-1 ring-blue-300 w-full pl-1"
+                        autocomplete="new-password"
+                        placeholder="confirm password"
+                        required>
+                </div>
+                <div class="flex flex-col md:flex-row md:gap-2">
+                    <button
+                        type="submit"
+                        class="px-4 py-2 rounded bg-blue-400 text-white hover:bg-blue-700 my-4 w-full md:w-1/2">
+                            Activate Account
+                    </button>
+                    <button
+                        type="submit"
+                        name="decline"
+                        class="px-4 py-2 rounded bg-white border border-blue-400 text-blue-400 hover:text-blue-700 hover:border-blue-700 my-4 w-full md:w-1/2">
+                            Decline Intivation
+                    </button>
+                </div>      
+            </div>   
+        {% endform %}
+    </div>
+</div>
+    
